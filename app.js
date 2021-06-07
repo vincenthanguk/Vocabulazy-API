@@ -24,7 +24,7 @@ const decks = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/decks.json`)
 );
 
-// NOTE: -------- HANDLERS --------
+// NOTE: -------- HANDLERS (/Controllers) --------
 
 const getAllDecks = (req, res) => {
   console.log(req.requestTime);
@@ -108,6 +108,39 @@ const deleteDeck = (req, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'this route is not yet defined!',
+  });
+};
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'this route is not yet defined!',
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'this route is not yet defined!',
+  });
+};
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'this route is not yet defined!',
+  });
+};
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'this route is not yet defined!',
+  });
+};
+
 // NOTE: -------- Routes --------
 // app.get('/api/v1/decks', getAllDecks);
 // app.post('/api/v1/decks', createDeck);
@@ -115,21 +148,21 @@ const deleteDeck = (req, res) => {
 // app.patch('/api/v1/decks/:id', updateDeck);
 // app.delete('/api/v1/decks/:id', deleteDeck);
 // --- slicker and more readable version below ---
-app.route('/api/v1/decks').get(getAllDecks).post(createDeck);
 
-app
-  .route('/api/v1/decks/:id')
-  .get(getDeck)
-  .patch(updateDeck)
-  .delete(deleteDeck);
+const deckRouter = express.Router();
+const userRouter = express.Router();
 
-app.route('/api/v1/users').get(getAllUsers).post(createUser);
+// mounting the router
+app.use('/api/v1/decks', deckRouter);
+app.use('/api/v1/users', userRouter);
 
-app
-  .route('/api/v1/users/:id')
-  .get(getUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+deckRouter.route('/').get(getAllDecks).post(createDeck);
+
+deckRouter.route('/:id').get(getDeck).patch(updateDeck).delete(deleteDeck);
+
+userRouter.route('/').get(getAllUsers).post(createUser);
+
+app.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
 
 const port = 3000;
 app.listen(port, () => {
