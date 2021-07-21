@@ -34,7 +34,9 @@ exports.getDeck = (req, res) => {
   });
 };
 
-exports.createDeck = (req, res) => {
+exports.createDeck = async (req, res) => {
+  const newDeck = await Deck.create(req.body);
+
   res.status(201).json({
     status: 'success',
     data: {
