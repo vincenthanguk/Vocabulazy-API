@@ -1,8 +1,4 @@
-const fs = require('fs');
-
-const decks = JSON.parse(
-  fs.readFileSync(`${__dirname}/../dev-data/data/decks.json`)
-);
+const Deck = require('../models/deckModel');
 
 exports.getAllDecks = (req, res) => {
   console.log(req.requestTime);
@@ -39,23 +35,12 @@ exports.getDeck = (req, res) => {
 };
 
 exports.createDeck = (req, res) => {
-  const newId = decks[decks.length - 1].id + 1;
-  const newDeck = Object.assign({ id: newId }, req.body);
-
-  decks.push(newDeck);
-
-  fs.writeFile(
-    `${__dirname}/dev-data/data/decks.json`,
-    JSON.stringify(decks),
-    (err) => {
-      res.status(201).json({
-        status: 'success',
-        data: {
-          decks: newDeck,
-        },
-      });
-    }
-  );
+  res.status(201).json({
+    status: 'success',
+    data: {
+      decks: newDeck,
+    },
+  });
 };
 
 exports.updateDeck = (req, res) => {

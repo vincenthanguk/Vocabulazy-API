@@ -94,7 +94,26 @@
       { "cardId": 5, "cardFront": "deck4 5", "cardBack": "deck4 5" }
     ]
   },
-  { "id": 5, "name": "Test Deck", "cards": 10, "difficulty": "easy" },
-  { "id": 6, "name": "Test Deck", "cards": 10, "difficulty": "easy" },
-  { "id": 7, "name": "Test Deck", "cards": 10, "difficulty": "easy" }
+  {
+    "name": "deck 5",
+    "id": 5,
+    "cards": [
+      { "cardId": 1, "cardFront": "deck5 1", "cardBack": "deck5 1" },
+      { "cardId": 2, "cardFront": "deck5 2", "cardBack": "deck5 2" },
+      { "cardId": 3, "cardFront": "deck5 3", "cardBack": "deck5 3" },
+      { "cardId": 4, "cardFront": "deck5 4", "cardBack": "deck5 4" },
+      { "cardId": 5, "cardFront": "deck5 5", "cardBack": "deck5 5" }
+    ]
+  },
+  {
+    "name": "deck 6",
+    "id": 5,
+    "cards": [
+      { "cardId": 1, "cardFront": "deck6 1", "cardBack": "deck6 1" },
+      { "cardId": 2, "cardFront": "deck6 2", "cardBack": "deck6 2" },
+      { "cardId": 3, "cardFront": "deck6 3", "cardBack": "deck6 3" },
+      { "cardId": 4, "cardFront": "deck6 4", "cardBack": "deck6 4" },
+      { "cardId": 5, "cardFront": "deck6 5", "cardBack": "deck6 5" }
+    ]
+  }
 ]
