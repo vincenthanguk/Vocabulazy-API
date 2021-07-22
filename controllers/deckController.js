@@ -1,63 +1,81 @@
 const Deck = require('../models/deckModel');
 
-exports.getAllDecks = (req, res) => {
-  console.log(req.requestTime);
+exports.getAllDecks = async (req, res) => {
+  try {
+    const decks = await Deck.find();
 
-  res.status(200).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    results: decks.length,
-    data: {
-      decks: decks,
-    },
-  });
-};
-
-exports.getDeck = (req, res) => {
-  //   find element that has id equal to req.params
-  //   convert string to number with * 1
-  const id = req.params.id * 1;
-
-  if (id > decks.length) {
-    return res.status(404).json({
+    res.status(200).json({
+      status: 'success',
+      requestedAt: req.requestTime,
+      results: decks.length,
+      data: {
+        decks,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
       status: 'fail',
-      message: 'invalid id',
+      message: err,
     });
   }
-  const deck = decks.find((el) => el.id === id);
+};
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      deck,
-    },
-  });
+exports.getDeck = async (req, res) => {
+  try {
+    const deck = await Deck.findById(req.params.id);
+    // === Deck.findOne({ _id: req.params.id })
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        deck,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
 
 exports.createDeck = async (req, res) => {
-  const newDeck = await Deck.create(req.body);
+  try {
+    const newDeck = await Deck.create(req.body);
 
-  res.status(201).json({
-    status: 'success',
-    data: {
-      decks: newDeck,
-    },
-  });
-};
-
-exports.updateDeck = (req, res) => {
-  if (req.params.id * 1 > decks.length) {
-    return res.status(404).json({
+    res.status(201).json({
+      status: 'success',
+      data: {
+        deck: newDeck,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
       status: 'fail',
-      message: 'invalid id',
+      message: 'Invalid data sent!',
     });
   }
-  res.status(200).json({
-    status: 'success',
-    data: {
-      decks: '<updated decks here>',
-    },
-  });
+};
+
+exports.updateDeck = async (req, res) => {
+  try {
+    const deck = await Deck.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        deck,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
 
 exports.deleteDeck = (req, res) => {
