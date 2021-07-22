@@ -13,6 +13,11 @@ const deckSchema = new mongoose.Schema({
       ref: 'Card',
     },
   ],
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
 });
 
 const Deck = mongoose.model('Deck', deckSchema);

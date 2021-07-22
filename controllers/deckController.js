@@ -78,15 +78,18 @@ exports.updateDeck = async (req, res) => {
   }
 };
 
-exports.deleteDeck = (req, res) => {
-  if (req.params.id * 1 > decks.length) {
-    return res.status(404).json({
+exports.deleteDeck = async (req, res) => {
+  // TODO: delete all references/cards
+  try {
+    await Deck.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
       status: 'fail',
-      message: 'invalid id',
+      message: err,
     });
   }
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
 };

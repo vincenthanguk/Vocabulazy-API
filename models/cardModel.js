@@ -15,6 +15,11 @@ const cardSchema = new Schema({
     ref: 'Deck',
     required: [true, 'Card must contain reference to a deck'],
   },
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
 });
 
 const Card = mongoose.model('Card', cardSchema);
