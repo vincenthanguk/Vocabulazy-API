@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 const deckSchema = new mongoose.Schema({
   name: {
@@ -6,11 +7,12 @@ const deckSchema = new mongoose.Schema({
     required: [true, 'Deck must have a name!'],
     unique: true,
   },
-  id: {
-    type: Number,
-    required: [true, 'Deck must have an id!'],
-  },
-  cards: Number,
+  cards: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Card',
+    },
+  ],
 });
 
 const Deck = mongoose.model('Deck', deckSchema);
