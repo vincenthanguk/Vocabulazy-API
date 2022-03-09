@@ -79,7 +79,6 @@ exports.updateDeck = async (req, res) => {
 };
 
 exports.deleteDeck = async (req, res) => {
-  // TODO: delete all references/cards
   try {
     await Deck.findByIdAndDelete(req.params.id);
     res.status(204).json({

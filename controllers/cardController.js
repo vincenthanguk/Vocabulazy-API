@@ -83,7 +83,14 @@ exports.updateCard = async (req, res) => {
 
 // TODO:
 exports.deleteCard = async (req, res) => {
-  // delete reference in parent
+  // delete reference in parent ->
+  /* mongoose middleware 
+  farmSchema.post('findOneAndDelete', async function (farm) {
+  if (farm.products.length) {
+    const res = await Product.deleteMany({ _id: { $in: farm.products } });
+    console.log(res);
+  }
+}); */
   try {
     await Card.findByIdAndDelete(req.params.id);
     res.status(204).json({
