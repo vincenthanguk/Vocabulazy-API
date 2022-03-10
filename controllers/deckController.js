@@ -2,7 +2,7 @@ const Deck = require('../models/deckModel');
 
 exports.getAllDecks = async (req, res) => {
   try {
-    const decks = await Deck.find();
+    const decks = await Deck.find().populate('cards');
 
     res.status(200).json({
       status: 'success',
@@ -22,7 +22,7 @@ exports.getAllDecks = async (req, res) => {
 
 exports.getDeck = async (req, res) => {
   try {
-    const deck = await Deck.findById(req.params.id);
+    const deck = await Deck.findById(req.params.id).populate('cards');
     // === Deck.findOne({ _id: req.params.id })
 
     res.status(200).json({
