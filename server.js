@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const app = require('./app');
 
-dotenv.config({ path: './config.env' });
+if (process.env.NODE_ENV !== 'production') {
+  // Load environment variables from .env file in non prod environments
+  require('dotenv').config({ path: './config.env' });
+}
+const app = require('./app');
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
