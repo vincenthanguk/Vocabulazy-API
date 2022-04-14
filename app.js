@@ -58,7 +58,6 @@ app.use(cors(corsOptions));
 
 app.use(passport.initialize());
 
-app.use('/users', userRouter);
 app.use('/api/v1/decks', deckRouter);
 app.use('/api/v1/cards', cardRouter);
 app.use('/api/v1/users', userRouter);
