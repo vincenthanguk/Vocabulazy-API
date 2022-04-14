@@ -10,7 +10,8 @@ exports.COOKIE_OPTIONS = {
   secure: !dev,
   signed: true,
   maxAge: eval(process.env.REFRESH_TOKEN_EXPIRY) * 1000,
-  sameSite: 'none',
+  // SameSite works, but "sameSite" doesnt
+  SameSite: 'none',
 };
 
 exports.getToken = (user) => {
