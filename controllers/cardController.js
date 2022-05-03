@@ -1,23 +1,23 @@
 const Card = require('../models/cardModel');
 const Deck = require('../models/deckModel');
 
-exports.getAllCards = async (req, res) => {
-  try {
-    const cards = await Card.find();
+// exports.getAllCards = async (req, res) => {
+//   try {
+//     const cards = await Card.find();
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        cards,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+//     res.status(200).json({
+//       status: 'success',
+//       data: {
+//         cards,
+//       },
+//     });
+//   } catch (err) {
+//     res.status(404).json({
+//       status: 'fail',
+//       message: err,
+//     });
+//   }
+// };
 
 exports.createCard = async (req, res) => {
   try {
