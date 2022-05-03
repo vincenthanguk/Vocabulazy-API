@@ -3,10 +3,9 @@ const deckController = require('../controllers/deckController');
 
 const router = express.Router();
 
-router
-  .route('/')
-  .get(deckController.getAllDecks)
-  .post(deckController.createDeck);
+router.route('/:userId').get(deckController.getAllDecks);
+
+router.route('/').post(deckController.createDeck);
 
 router
   .route('/:id')
