@@ -4,7 +4,7 @@ const deckController = require('../controllers/deckController');
 const router = express.Router();
 const { verifyUser } = require('../authenticate');
 
-router.route('/:userId').get(deckController.getAllDecks);
+router.route('/:userId').get(verifyUser, deckController.getAllDecks);
 
 router.route('/').post(verifyUser, deckController.createDeck);
 
