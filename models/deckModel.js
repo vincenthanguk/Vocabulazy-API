@@ -8,6 +8,10 @@ const deckSchema = new mongoose.Schema({
     required: [true, 'Deck must have a name!'],
     unique: true,
   },
+  user: {
+    type: String,
+    required: [true, 'Deck must contain reference to a user!'],
+  },
   cards: [
     {
       type: Schema.Types.ObjectId,
