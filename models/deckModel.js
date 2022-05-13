@@ -5,6 +5,7 @@ const Card = require('./cardModel');
 const deckSchema = new mongoose.Schema({
   name: {
     type: String,
+    maxLength: [20, 'Deck name must be 20 characters or less!'],
     required: [true, 'Deck must have a name!'],
   },
   user: {
