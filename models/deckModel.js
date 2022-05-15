@@ -2,28 +2,26 @@ const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 const Card = require('./cardModel');
 
-const deckSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    maxLength: [20, 'Deck name must be 20 characters or less!'],
-    required: [true, 'Deck must have a name!'],
-  },
-  user: {
-    type: String,
-    required: [true, 'Deck must contain reference to a user!'],
-  },
-  cards: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Card',
+const deckSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      maxLength: [20, 'Deck name must be 20 characters or less!'],
+      required: [true, 'Deck must have a name!'],
     },
-  ],
-  createdAt: {
-    type: Date,
-    required: true,
-    default: Date.now,
+    user: {
+      type: String,
+      required: [true, 'Deck must contain reference to a user!'],
+    },
+    cards: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Card',
+      },
+    ],
   },
-});
+  { timestamps: true }
+);
 
 // middleware for removing referenced cards upon deck deletion
 deckSchema.post('findOneAndDelete', async function (doc, next) {
