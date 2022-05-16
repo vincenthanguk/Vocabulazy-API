@@ -149,3 +149,19 @@ exports.logout = (req, res, next) => {
     (err) => next(err)
   );
 };
+
+exports.delete = async (req, res, next) => {
+  try {
+    console.log(req.user._id);
+    await User.findByIdAndDelete(req.user._id);
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
