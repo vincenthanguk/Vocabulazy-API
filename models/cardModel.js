@@ -18,6 +18,10 @@ const cardSchema = new Schema(
       ref: 'Deck',
       required: [true, 'Card must contain reference to a deck'],
     },
+    user: {
+      type: String,
+      required: [true, 'Deck must contain reference to a user!'],
+    },
   },
   { timestamps: true }
 );

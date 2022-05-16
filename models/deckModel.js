@@ -26,6 +26,7 @@ const deckSchema = new mongoose.Schema(
 // middleware for removing referenced cards upon deck deletion
 deckSchema.post('findOneAndDelete', async function (doc, next) {
   try {
+    console.log(doc._id);
     if (doc) {
       const deleteResult = await Card.deleteMany({
         deck: doc._id,
