@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local');
 
 const deckRouter = require('./routes/deckRoutes');
 const cardRouter = require('./routes/cardRoutes');
+const studysessionRouter = require('./routes/studysessionRoutes');
 
 require('./strategies/JwtStrategy');
 require('./strategies/LocalStrategy');
@@ -61,6 +62,7 @@ app.use(passport.initialize());
 app.use('/api/v1/decks', deckRouter);
 app.use('/api/v1/cards', cardRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/studysession', studysessionRouter);
 
 // -------- START SERVER --------
 module.exports = app;

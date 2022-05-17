@@ -18,10 +18,6 @@ const User = new Schema(
       type: String,
       default: '',
     },
-    lastName: {
-      type: String,
-      default: '',
-    },
     studySessions: {
       type: Number,
       default: 0,
