@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 const Card = require('./cardModel');
+const Studysession = require('./studysessionModel');
 
 const deckSchema = new mongoose.Schema(
   {
@@ -10,7 +11,8 @@ const deckSchema = new mongoose.Schema(
       required: [true, 'Deck must have a name!'],
     },
     user: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: [true, 'Deck must contain reference to a user!'],
     },
     cards: [
@@ -23,16 +25,20 @@ const deckSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// middleware for removing referenced cards upon deck deletion
+// middleware for removing referenced cards and studysessions upon deck deletion
 deckSchema.post('findOneAndDelete', async function (doc, next) {
   try {
     console.log(doc._id);
     if (doc) {
-      const deleteResult = await Card.deleteMany({
+      const deleteCardResult = await Card.deleteMany({
         deck: doc._id,
       });
+      console.log('Card delete result: ', deleteCardResult);
 
-      console.log('Card delete result: ', deleteResult);
+      const deleteStudysessionResult = await Studysession.deleteMany({
+        deck: doc._id,
+      });
+      console.log('Studysession delete result: ', deleteStudysessionResult);
     }
     next();
   } catch (err) {

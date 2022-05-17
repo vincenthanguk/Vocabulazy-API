@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Deck = require('./deckModel');
 const Card = require('./cardModel');
+const Studysession = require('./studysessionModel');
 
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -18,10 +19,18 @@ const User = new Schema(
       type: String,
       default: '',
     },
-    studySessions: {
-      type: Number,
-      default: 0,
-    },
+    decks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Deck',
+      },
+    ],
+    studysessions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Studysession',
+      },
+    ],
     authStrategy: {
       type: String,
       default: 'local',
@@ -33,7 +42,7 @@ const User = new Schema(
   { timestamps: true }
 );
 
-// middleware for removing referenced cards upon deck deletion
+// middleware for removing referenced decks, cards and studysessions upon deck deletion
 User.post('findOneAndDelete', async function (doc, next) {
   try {
     console.log(doc._id);
@@ -46,8 +55,13 @@ User.post('findOneAndDelete', async function (doc, next) {
         user: doc._id,
       });
 
+      const deleteStudysessionResult = await Studysession.deleteMany({
+        deck: doc._id,
+      });
+
       console.log('Deck delete result: ', deckDeleteResult);
       console.log('Card delete result: ', cardDeleteResult);
+      console.log('Studysession delete result: ', deleteStudysessionResult);
     }
     next();
   } catch (err) {

@@ -19,7 +19,8 @@ const cardSchema = new Schema(
       required: [true, 'Card must contain reference to a deck'],
     },
     user: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: [true, 'Deck must contain reference to a user!'],
     },
   },
