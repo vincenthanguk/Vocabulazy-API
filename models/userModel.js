@@ -54,9 +54,9 @@ User.post('findOneAndDelete', async function (doc, next) {
       const cardDeleteResult = await Card.deleteMany({
         user: doc._id,
       });
-
+      gi;
       const deleteStudysessionResult = await Studysession.deleteMany({
-        deck: doc._id,
+        user: doc._id,
       });
 
       console.log('Deck delete result: ', deckDeleteResult);
