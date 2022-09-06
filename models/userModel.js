@@ -42,7 +42,7 @@ const User = new Schema(
   { timestamps: true }
 );
 
-// middleware for removing referenced decks, cards and studysessions upon deck deletion
+// middleware for removing referenced decks, cards and studysessions upon user deletion
 User.post('findOneAndDelete', async function (doc, next) {
   try {
     console.log(doc._id);
@@ -54,7 +54,7 @@ User.post('findOneAndDelete', async function (doc, next) {
       const cardDeleteResult = await Card.deleteMany({
         user: doc._id,
       });
-      gi;
+
       const deleteStudysessionResult = await Studysession.deleteMany({
         user: doc._id,
       });

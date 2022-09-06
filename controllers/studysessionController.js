@@ -41,3 +41,17 @@ exports.createStudysession = async (req, res) => {
     });
   }
 };
+
+exports.deleteAllStudysessions = async (req, res) => {
+  try {
+    const deleteStudysessionResult = await Studysession.deleteMany({
+      user: req.user._id,
+    });
+    console.log(deleteStudysessionResult);
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
